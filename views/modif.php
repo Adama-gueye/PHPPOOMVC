@@ -8,8 +8,7 @@ $items = $contact->getContactById($id);
 if (isset($_POST['btnModif'])) {
     extract($_POST);
     $contact->modif($nom,$prenom,$tel,$id);
-    header('Location : http://localhost/simplon/PHP%20-%20MVC%20-%20POO/views/ajout.php');
-    
+    header('Location : http://localhost/simplon/PHP%20-%20MVC%20-%20POO/views/ajout.php');    
 }
 ?>
 <body>

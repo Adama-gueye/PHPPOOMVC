@@ -1,24 +1,38 @@
 <?php
-
-class BD{
-    private $SERVEUR="localhost"; 
-    private $BD="taxibokbok"; 
-    private $USER="root"; 
-    private $MDP="";
-    private $bdcon; 
-    private $option;
+class Database {
+    private static $instance = null;
     private $conn;
 
-    public function __construct() {
-    }
-    public function connexionBD(){
-        $this->bdcon='mysql:host='.$this->SERVEUR.';dbname='.$this->BD.';charset=utf8';
-        $this->option=array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION);
+    private function __construct() {
+        $SERVER = "localhost";
+        $BD = "gestiondecontacts";
+        $USER = "root";
+        $MDP = "";
+        $bdcon = 'mysql:host=' . $SERVER . ';dbname=' . $BD . ';charset=utf8';
+        $option = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
         try {
-            $this->conn=new PDO($this->bdcon,$this->USER,$this->MDP,$this->option);
+            $this->conn = new PDO($bdcon, $USER, $MDP, $option);
         } catch (PDOException $th) {
-            die("Erreur de connexion :".$th->getMessage());
+            die("Erreur de connexion :" . $th->getMessage());
         }
     }
-    
+
+    // public static function getInstance() {
+    //     if (self::$instance === null) {
+    //         self::$instance = new self();
+    //     }
+    //     return self::$instance;
+    // }
+
+    public static function getInstance() {
+        static $instance = null;
+        if ($instance === null) {
+            $instance = new Database();
+        }
+        return $instance;
+    }
+
+    public function getConnection() {
+        return $this->conn;
+    }
 }

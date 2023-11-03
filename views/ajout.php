@@ -1,40 +1,12 @@
 <?php
 include_once "../header.php";
-session_start();
+include_once "../controllers/control.php";
 // if (empty($_SESSION)) {
 //     header("location:http://localhost/simplon/PHP%20-%20MVC%20-%20POO/views/auth.php");
 // }
 
-if (isset($_GET['deconnexion'])) {
-    session_unset();
-    header("location:http://localhost/simplon/PHP%20-%20MVC%20-%20POO/views/auth.php");
-}
-include ('../models/Contact.php');
-$contacts = new Contact();
-$results = $contacts->listeContact();
-$results2 = $contacts->listeFavoris();
 
 
-if (isset($_POST['btnAjout'])) {
-    extract($_POST);
-    $contacts->ajout($nom,$prenom,$tel);
-    
-}
-if (isset($_POST['sup'])) {
-    extract($_POST);
-    $contacts->sup($_POST['sup']);
-    
-}
-if (isset($_POST['favoris'])) {
-    extract($_POST);
-    $contacts->favoris($_POST['favoris']);
-    
-}
-if (isset($_POST['defavoris'])) {
-    extract($_POST);
-    $contacts->defavoris($_POST['defavoris']);
-    
-}
 ?>
 
 <div class="container mt-2">
